@@ -43,8 +43,18 @@ if __name__ == '__main__':
     print('Приветствую!')
     while True:
         choice = input('Выберите действие: \n1 - Вход в систему\n2 - Регистрация\n0 - Выход\n')
-        # if choice == '1':
-        #     pass
+        if choice == '1':
+            login = input('Введите логин: ')
+            if login in database.data:
+                print('ok')
+            else:
+                print('Пользователь не найден.')
+            password = input('Введите пароль: ')
+            if password == database.data[login]:
+                print(f'Вход выполнен, {login}!')
+                break
+            else:
+                print('Неверный пароль')
         if choice == '2':
             user = User(
                 input('Введите логин: '),
@@ -52,7 +62,8 @@ if __name__ == '__main__':
                 password2 := input('Повторите пароль: ')
             )
             if password != password2:
-                exit()
+                print('Пароли не совпадают, попробуйте ещё раз.')
+                continue
             if user.username is not None and user.password is not None:
                 database.add_user(user.username, user.password)
                 print(database.data)
