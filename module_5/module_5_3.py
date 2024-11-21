@@ -1,11 +1,11 @@
 class House():
+
     houses_history = []
 
-    def __new__(cls, *args, **kwargs):
-        house = super(House, cls).__new__(cls)
-        if args and args[0] not in cls.houses_history:
-            cls.houses_history.append(args[0])
-            return house
+    def __new__(cls, *args, **kwargs): #добавление дома в историю
+        house = args[0]
+        cls.houses_history.append(house)
+        return super().__new__(cls)
 
 
     def __init__(self, name, number_of_floors):
@@ -28,29 +28,29 @@ class House():
     def __eq__(self, other):
         return self.number_of_floors == other.number_of_floors
 
-    def __lt__(self, other):
+    def __lt__(self, other): #меньше, чем
         return self.number_of_floors < other.number_of_floors
 
-    def  __le__(self, other):
+    def  __le__(self, other): #меньше или равно
         return self.number_of_floors <= other.number_of_floors
 
-    def  __gt__(self, other):
+    def  __gt__(self, other): #больше, чем
         return self.number_of_floors > other.number_of_floors
 
-    def  __ge__(self, other):
+    def  __ge__(self, other): #больше или равно
         return self.number_of_floors >= other.number_of_floors
 
     def  __ne__(self, other):
         return self.number_of_floors != other.number_of_floors
 
-    def __add__(self, value):
+    def __add__(self, value): #чем отличается от iadd?
         self.number_of_floors += value
         return self
 
     def __radd__(self, value): #+ объект справа
         return self.__add__(value)
 
-    def __iadd__(self, value): # +=
+    def __iadd__(self, value): # += перезаписывает
         return self.__add__(value)
 
     def __del__(self):
